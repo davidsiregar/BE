@@ -1,0 +1,28 @@
+{
+  "name": "BE",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "build": "node src/index.js"
+  },
+  "author": "DS",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "latest"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.8",
+    "connect-flash": "^0.1.1",
+    "cors": "latest",
+    "dotenv": "latest",
+    "ejs": "^3.1.8",
+    "express": "latest",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.6.5",
+    "validator": "^13.7.0"
+  }
+}
