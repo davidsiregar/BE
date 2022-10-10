@@ -2,9 +2,9 @@ const validator = require("validator");
 const {} = require("../models");
 
 exports.registerValidator = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
-  if (username && email && password === "") {
+  if (firstName && lastName && email && password === "") {
     return res.status(400).send({
       message: "field should not empty",
     });
