@@ -4,11 +4,12 @@ const { user } = require("../models");
 
 exports.register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 5);
 
     let insertUser = await user.create({
-      username: username,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: hashedPassword,
     });
@@ -16,6 +17,7 @@ exports.register = async (req, res) => {
     return res.status(201).send({
       message: "register success",
     });
+    res.redirect("http://localhost:3000/login");
   } catch (error) {
     res.status(500).send({
       code: 500,
@@ -29,7 +31,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     let getUser = await user.findOne({
-      where: { username: req.body.username },
+      where: { email: req.body.email },
     });
 
     const isPasswordValid = bcrypt.compareSync(
@@ -51,9 +53,11 @@ exports.login = async (req, res) => {
       { expiresIn: 3600 }
     );
 
+    res.redirect("/");
+
     return res.status(200).send({
       message: "login successfully",
-      data: getUser.dataValues.username,
+      data: getUser.dataValues.email,
       token: token,
     });
   } catch (error) {
@@ -63,5 +67,6 @@ exports.login = async (req, res) => {
       message: error.message,
       data: null,
     });
+    res.redirect("/login");
   }
 };
