@@ -17,7 +17,6 @@ exports.register = async (req, res) => {
     return res.status(201).send({
       message: "register success",
     });
-    res.redirect("http://localhost:3000/login");
   } catch (error) {
     res.status(500).send({
       code: 500,
@@ -53,8 +52,6 @@ exports.login = async (req, res) => {
       { expiresIn: 3600 }
     );
 
-    res.redirect("/");
-
     return res.status(200).send({
       message: "login successfully",
       data: getUser.dataValues.email,
@@ -67,6 +64,5 @@ exports.login = async (req, res) => {
       message: error.message,
       data: null,
     });
-    res.redirect("/login");
   }
 };
