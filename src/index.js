@@ -1,7 +1,9 @@
+
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path= require("path")
+
 
 const https= require("https")
 const bodyParser=require("request")
@@ -30,9 +32,9 @@ app.use(cors({ origin: true, credentials: true }));
 app.use('/', router);
 app.use(authRoute);
 
-app.get("/newsletter", function(req,res){
-  res.render(__dirname+"/views/signup.ejs")
-})
+// app.get("/newsletter", function(req,res){
+//   res.render(__dirname+"/views/signup.ejs")
+// })
 
 app.post("/newsletter", function(req,res){
   const firstName= req.body.inputFirst;
@@ -55,12 +57,13 @@ app.post("/newsletter", function(req,res){
   const url = "https://us14.api.mailchimp.com/3.0/lists/f7b34d5d3e";
   const options = {
     method: "POST",
-    auth: "david:00963476257dc21899ade155ba97831e-us14",
+    auth: "david:9e6228dcb1e5904c5dabb78c4883a965-us14",
   };
 
   const request = https.request(url, options, function (response) {
     if (response.statusCode === 200) {
       res.render(__dirname + "/views/success.ejs");
+      console.log(response)
     } else {
       res.render(__dirname + "/views/failure.ejs");
     }
